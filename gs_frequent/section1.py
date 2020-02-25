@@ -164,10 +164,27 @@ def firstUniqChar(s):
             return index
         
     return -1
-
-# 443. String Compression
-def compress(chars):
-    
+# 74 Search a 2D Matrix
+# think like a binary search
+ def searchMatrix(matrix, target):
+     if matrix is None or len(matrix) == 0:
+         return False
+     
+     row = len(matrix)
+     col = len(matrix[0])
+     start = 0
+     end = row * col - 1
+     while start <= end:
+         mid = (end - start)//2 + start
+         mid_value = matrix[mid//col][mid%col]
+         if mid_value == target:
+             return True
+         elif mid_value < target:
+             start = mid + 1
+         else:
+             end = mid - 1
+             
+    return False
 
 # 1086 High Five
 def highFive(items):
