@@ -41,6 +41,28 @@ def myAtoi(strs):
     
     return int(result)*sign
 
+# 39 Combination Sum
+class CombinSum:    
+    def combinationSum(self, candidates, target):
+        result = []
+        if candidates is None or len(candidates) == 0:
+            return result
+        
+        self.helper(result, [], candidates, target, 0)
+        return []
+
+    def helper(self, result, path, candidates, target, start):
+        if target < 0:
+            return
+        
+        if target == 0:
+            result.append(path)
+            return
+        
+        for i in range(start, len(candidates)):
+            self.helper(result, path + [candidates[i]], candidates, target - candidates[i], i)
+        
+
 # 49 Group Anagrams
 # dictionary
 # string sorting
@@ -71,6 +93,32 @@ def permute(nums):
             ans.append([num] + y)
 
     return ans
+
+# 98 Validate Binary Search Tree
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class ValidateBsf:
+    def isValidBST(self, root):
+        if root is None:
+            return True
+        
+        return self.helper(root, None, None)
+    
+    def helper(self, root, min_, max_):
+        if root is None:
+            return True
+        
+        if min_ is not None and root.val <= min_:
+            return False
+        
+        if max_ is not None and root.val >= max_:
+            return False
+        
+        return self.helper(root.left, min_, root.val) and self.helper(root.right, root.val, max_)
 
 # 118. Pascal's Triangle
 def generate(numRows):
@@ -166,7 +214,7 @@ def firstUniqChar(s):
     return -1
 # 74 Search a 2D Matrix
 # think like a binary search
- def searchMatrix(matrix, target):
+def searchMatrix(matrix, target):
      if matrix is None or len(matrix) == 0:
          return False
      
@@ -184,7 +232,8 @@ def firstUniqChar(s):
          else:
              end = mid - 1
              
-    return False
+     return False
+
 
 # 1086 High Five
 def highFive(items):
