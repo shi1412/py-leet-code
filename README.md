@@ -1,7 +1,8 @@
 # Leet Code for  Python
 
-### Python Leet Code Easy Index
->1. 771 Jewels and Stones
->2. 804 Unique Morse Code Words
->3. 595 Big Countries
->4. 832 Flipping an Image
+#### LeetCode by Company
+:loudspeaker: *gs_frequent* Goldman Sachs
+#### LeetCode by data structures and algorithms
+:books: *basic_implement* Basic data structures and algorithms
+#### LeetCode summary
+:page_with_curl: *summary*  cover the questions from 1-400
