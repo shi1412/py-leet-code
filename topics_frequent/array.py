@@ -3,43 +3,6 @@ from utilities.tree import TreeNode
 from collections import deque, defaultdict
 import heapq
 
-class two_sum_1:
-    def twoSum(self, nums, target):
-        obj = {}
-        for i in range(len(nums)):
-            if target - nums[i] in obj:
-                return [i, obj[target - nums[i]]]
-            
-            obj[nums[i]] = i
-
-class add_two_numbers_2:
-    """
-    time: O(n)
-    space: O(n)
-    """
-    def addTwoNumbers(self, l1, l2):
-        dummy = ListNode(0)
-        sum_ = 0
-        cur = dummy
-        p1, p2 = l1, l2
-        while p1 or p2:
-            if p1:
-                sum_ += p1.val
-                p1 = p1.next
-                
-            if p2:
-                sum_ += p2.val
-                p2 = p2.next
-                
-            cur.next = ListNode(sum_ % 10)
-            sum_ //= 10
-            cur = cur.next
-            
-        if sum_ == 1:
-            cur.next = ListNode(1)
-            
-        return dummy.next
-
 class merge_sorted_array_88:
     def merge(self, nums1, nums2, m, n):
         if nums1 is None or len(nums1) == 0:
