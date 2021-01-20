@@ -99,13 +99,13 @@ class remove_duplicates_from_sorted_array_80:
             return len(nums)
         
         count = 2
-        for i in range(len(nums)):
+        for i in range(2, len(nums)):
             if nums[i] != nums[count - 2]:
-                count += 1
                 nums[count] = nums[i]
+                count +=1 
                 
         return count
-        
+          
 class merge_sorted_array_88:
     def merge(self, nums1, nums2, m, n):
         if nums1 is None or len(nums1) == 0:
