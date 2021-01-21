@@ -66,6 +66,50 @@ class remove_element_27:
         
         return res                
 
+class merge_intervals_56:
+    def merge(self, intervals):
+        if intervals is None or len(intervals) == 0:
+            return intervals
+        
+        intervals.sort(key=lambda x:x[0])
+        start = intervals[0][0]
+        end = intervals[0][1]
+        res = []
+        for interval in intervals:
+            if interval[0] <= end:
+                end = max(end, interval[1])
+            else:
+                # Before update the start and end
+                # append the last result to the final array
+                res.append([start, end])
+                start = interval[0]
+                end = interval[1]
+                
+        res.append([start, end])
+        return res
+
+class insert_interval_57:
+    def insert(self, intervals, newInterval):
+        if newInterval is None:
+            return intervals
+        res = []
+        i = 0
+        while i < len(intervals) and intervals[i].end < newInterval[0]:
+            res.append(intervals[i])
+            i += 1
+            
+        while i < len(intervals) and intervals[i].start <= newInterval[1]:
+            newInterval[0] = min(newInterval[0], intervals[i][0])
+            newInterval[1] = max(newInterval[1], intervals[i][1])
+            i += 1
+            
+        res.append(newInterval)
+        while i < len(intervals):
+            res.append(intervals[i])
+            i += 1
+            
+        return res 
+                           
 class sort_colors_75:
     """ Dutch National Flag Problem
     time: O(n)
@@ -146,7 +190,28 @@ class kth_largest_element_in_array_215:
                 heapq.heappop(priority_queue)
                 
         return heapq.heappop(priority_queue)
-   
+
+class summary_ranges_228:
+    def summaryRanges(self, nums):
+        if nums is None or len(nums) == 0:
+            return nums
+        
+        res = []
+        i = 0
+        while i < len(nums):
+            num = nums[i]
+            while i < len(nums) - 1 and nums[i] + 1 == nums[i + 1]:
+                i += 1
+                
+            if num != nums[i]:
+                res.append("{0}->{1}".format(num, nums[i]))
+            else:
+                res.append(str(num))
+                
+            i += 1
+        
+        return res
+        
 class shortest_word_distance_243:
     def shortestDistance(self, words, word1, word2):
         if words is None or len(words) == 0:
@@ -209,6 +274,22 @@ class shortest_word_distance_245:
                 
         return res 
 
+class meeting_rooms_252:
+    def canAttendMeetings(self, intervals):
+        if intervals is None or len(intervals) == 0:
+            return None
+        
+        intervals.sort(key=lambda x: x[0])
+        for i in range(1, len(intervals)):
+            if intervals[i-1][1] > intervals[i][0]:
+                return False
+            
+        return True
+    
+class meeting_rooms_253:
+    def minMeetingRooms(self, intervals):
+        pass
+       
 class move_zeroes_283:
     def moveZeroes(self, nums):
         if nums is None or len(nums) == 0:
