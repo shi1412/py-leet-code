@@ -177,7 +177,33 @@ class merge_sorted_array_88:
             k -= 1
             
         return nums1
+
+class missing_range_163:
+    def findMissingRanges(self, nums, lower, upper):
+        res = []
+        if nums is None or len(nums) == 0:
+            res.append(self._format_range(lower, upper))
+            return res
+        
+        if nums[0] > lower:
+            res.append(self._format_range(lower, nums[0] - 1))
+            
+        for i in range(1, len(nums)):
+            if nums[i] - nums[i - 1] > 1:
+                res.append(self._format_range(nums[i - 1] + 1, nums[i] - 1))
                 
+        if nums[-1] < upper:
+            res.append(self._format_range(nums[-1] + 1, upper)) 
+       
+        return res 
+   
+    @staticmethod    
+    def _format_range(lower, upper):
+        if lower == upper:
+            return str(lower)
+        else:
+            return "{0}->{1}".format(lower, upper)
+        
 class kth_largest_element_in_array_215:
     def findKthLargest(self, nums, k):
         if nums is None or len(nums) == 0:

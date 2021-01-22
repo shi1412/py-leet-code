@@ -14,3 +14,17 @@ def test_27():
     nums = [0,1,2,2,3,0,4,2]
     print("Test question 27")
     assert topics.remove_element_27().removeElement(nums, 2) == 5
+    
+def test_56():
+    intervals = [[1,3],[2,6],[8,10],[15,18]]
+    print("Test question 56")
+    assert topics.merge_intervals_56().merge(intervals) == [[1,6],[8,10],[15,18]]
+    
+def test_163():
+    nums, l, u = [0,1,3,50,75], 0, 99
+    nums1, l1, u1 = [], 1, 1
+    nums2, l2, u2 = [], -3, -1
+    print("Test question 163")
+    assert topics.missing_range_163().findMissingRanges(nums, l, u) == ["2","4->49","51->74","76->99"]
+    assert topics.missing_range_163().findMissingRanges(nums1, l1, u1) == ["1"]
+    assert topics.missing_range_163().findMissingRanges(nums2, l2, u2) == ["-3->-1"]
