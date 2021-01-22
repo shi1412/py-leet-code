@@ -1,2 +1,6 @@
 /.vscode
-test.py
+some.py
+__pycache__/
+.DS_Store
+*.egg-info
+$s.py[cod]
