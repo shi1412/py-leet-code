@@ -263,6 +263,47 @@ class shortest_word_distance_245:
                 
         return res 
 
+class meeting_rooms_253:
+    def minMeetingRooms_A(self, intervals):
+        if intervals is None or len(intervals) == 0:
+            return 0
+        
+        starts = [interval[0] for interval in intervals]
+        ends = [interval[1] for interval in intervals]
+        
+        starts.sort()
+        ends.sort()
+        res = 0
+        end = 0
+        for i in range(len(intervals)):
+            if starts[i] < ends[end]:
+                res += 1
+            else:
+                end +=1
+                
+        return res
+    
+    def minMeetingRooms_B(self, intervals):
+        """
+            res[0]
+        |___|
+               |________|   => intervals[1][0] > res[0]
+        intervals[1][0]
+        """
+        if intervals is None or len(intervals) == 0:
+            return 0
+        
+        intervals.sort(key=lambda x:x[0])
+        res = []
+        heapq.heappush(res, intervals[0][1])
+        for i in range(1, len(intervals)):
+            if intervals[i][0] >= res[0]:
+                heapq.heappop(res)
+                
+            heapq.heappush(res, intervals[i][1])
+            
+        return len(res)
+    
 class move_zeroes_283:
     def moveZeroes(self, nums):
         if nums is None or len(nums) == 0:

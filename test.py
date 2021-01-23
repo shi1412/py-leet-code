@@ -28,3 +28,10 @@ def test_163():
     assert topics.missing_range_163().findMissingRanges(nums, l, u) == ["2","4->49","51->74","76->99"]
     assert topics.missing_range_163().findMissingRanges(nums1, l1, u1) == ["1"]
     assert topics.missing_range_163().findMissingRanges(nums2, l2, u2) == ["-3->-1"]
+    
+
+def test_253():
+    intervals = [[0,30],[5,10],[15,20]]
+    print("Test question 253")
+    assert topics.meeting_rooms_253().minMeetingRooms_A(intervals) == 2
+    assert topics.meeting_rooms_253().minMeetingRooms_B(intervals) == 2
