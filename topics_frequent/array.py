@@ -29,6 +29,33 @@ class remove_element_27:
         
         return res                
 
+class maximum_subarray_53:
+    def maxSubArray_A(self, nums):
+        if nums is None or len(nums) == 0:
+            return 0
+        
+        dp = [0]*len(nums)
+        dp[0] = nums[0]
+        res = nums[0]
+        for i in range(1, len(nums)):
+            if dp[i - 1] < 0:
+                dp[i] = nums[i]
+            else:
+                dp[i] = nums[i] + dp[i - 1]
+            
+            res = max(res, dp[i])
+            
+        return res 
+    
+    def maxSubArray_B(self, nums):
+        __sum = nums[0]
+        res = nums[0]
+        for i in range(1, len(nums)):
+            __sum = max(nums[i], nums[i] + __sum)
+            res = max(res, __sum)
+            
+        return res 
+        
 class merge_intervals_56:
     def merge(self, intervals):
         if intervals is None or len(intervals) == 0:
@@ -141,6 +168,22 @@ class merge_sorted_array_88:
             
         return nums1
 
+class maximum_product_subarray_152:
+    def maxProduct(self, nums):
+        if nums is None or len(nums) == 0:
+            return 0
+        
+        __max = nums[0]
+        __min = nums[0]
+        res = nums[0]
+        for i in range(1, len(nums)):
+            temp = __max
+            __max = max(__max * nums[i], __min * nums[i], nums[i])
+            __min = min(temp * nums[i], __min * nums[i], nums[i])
+            res = max(res, __max)
+            
+        return res
+    
 class missing_range_163:
     def findMissingRanges(self, nums, lower, upper):
         res = []
@@ -166,7 +209,20 @@ class missing_range_163:
             return str(lower)
         else:
             return "{0}->{1}".format(lower, upper)
-           
+
+class minimum_size_subarray_sum_209:
+    def minSubArray(self, s, nums):
+        res = float("inf")
+        left, __sum= 0, 0 
+        for i in range(len(nums)):
+            __sum += nums[i]
+            while left < i and __sum >= s:
+                res = min(res, i - left + 1)
+                __sum -= nums[left]
+                left += 1
+                
+        return res if res != float("inf") else 0
+        
 class kth_largest_element_in_array_215:
     def findKthLargest(self, nums, k):
         if nums is None or len(nums) == 0:
@@ -199,6 +255,23 @@ class summary_ranges_228:
                 
             i += 1
         
+        return res
+
+class product_of_array_except_self_238:
+    def productExceptSelf(self, nums):
+        if nums is None or len(nums) == 0:
+            return nums
+        
+        res = [1] + [0]*(len(nums) -1)
+        # calculate the product except self for the left
+        for i in range(1, len(nums)):
+            res[i] = res[i - 1] * nums[i - 1]
+        
+        right = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= right
+            right *= nums[i]
+            
         return res
     
 class shortest_word_distance_243:
