@@ -3,6 +3,23 @@ from utilities.tree import TreeNode
 from collections import deque, defaultdict
 import heapq
 
+class container_with_most_water_11:
+    def maxArea(self, height):
+        if height is None or len(height) == 0:
+            return 0 
+        
+        left  = 0
+        right = len(height) - 1
+        res = 0
+        while left < right:
+            res = max(res, min(height[left], height[right]) * (right - left))
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+                
+        return res
+    
 class remove_duplicates_from_sorted_array_26:
     def removeDuplicates(self, nums):
         if nums is None or len(nums) == 0:
@@ -29,6 +46,41 @@ class remove_element_27:
         
         return res                
 
+class trapping_rain_water_42:
+    def trap(self, height):
+        if height is None or len(height) == 0:
+            return 0
+        
+        left = 0
+        right = len(height) - 1
+        res = 0
+        left_max = 0
+        right_max = 0
+        while left < right:
+            if height[left] < height[right]:
+                left_max = max(height[left], left_max)
+                res += left_max - height[left]
+                left += 1
+            else:
+                right_max = max(height[right], right_max)
+                res += right_max - height[right]
+                right -= 1
+                
+        return res
+
+class rotate_image_48:
+    def rotate(self, matrix):
+        n = len(matrix)
+        for i in range(n):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+                
+        for i in range(n):
+            for j in range(n // 2):
+                matrix[i][j], matrix[i][n - 1 - j] = matrix[i][n - 1 -j], matrix[i][j]
+                
+        return matrix
+     
 class maximum_subarray_53:
     def maxSubArray_A(self, nums):
         if nums is None or len(nums) == 0:
@@ -445,7 +497,22 @@ class longest_increasing_subsequence_300:
             res = max(res, dp[i])
             
         return res
-                     
+
+class maximum_size_subarray_sum_equals_k_325:
+    def maxSubArrayLen(self, nums, k):
+        obj = {0: -1}
+        cur  = 0
+        res = 0
+        for i in range(len(nums)):
+            cur += nums[i]
+            if cur - k in obj:
+                res = max(res, i - obj[cur - k])
+                
+            if cur not in obj:
+                obj[cur] = i
+        
+        return res   
+                    
 class increasing_triplet_subsequence_334:
     def increasingTriplet(self, nums):
         if nums is None or len(nums) == 0:

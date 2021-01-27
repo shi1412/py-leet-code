@@ -5,6 +5,11 @@ import pytest
 # def array_with_dup():
 #     return [0,0,1,1,1,2,2,3,3,4]
 
+def test_11():
+    height = [4,3,2,1,4]
+    print("Test question 11")
+    assert topics.container_with_most_water_11().maxArea(height) == 16
+
 def test_26():
     nums = [0,0,1,1,1,2,2,3,3,4]
     print("Test question 26")
@@ -15,6 +20,16 @@ def test_27():
     print("Test question 27")
     assert topics.remove_element_27().removeElement(nums, 2) == 5
 
+def test_42():
+    height = [4,2,0,3,2,5]
+    print("Test question 42")
+    assert topics.trapping_rain_water_42().trap(height) == 9
+
+def test_48():
+    matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+    print("Test question 48")
+    assert topics.rotate_image_48().rotate(matrix) == [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+    
 def test_53():
     nums = [-2,1,-3,4,-1,2,1,-5,4]
     print("Test question 53")
@@ -56,3 +71,9 @@ def test_253():
     print("Test question 253")
     assert topics.meeting_rooms_253().minMeetingRooms_A(intervals) == 2
     assert topics.meeting_rooms_253().minMeetingRooms_B(intervals) == 2
+    
+def test_325():
+    nums = [-2, -1, 2, 1]
+    k = 1
+    print("Test quesion 325")
+    assert topics.maximum_size_subarray_sum_equals_k_325().maxSubArrayLen(nums, k) == 2
