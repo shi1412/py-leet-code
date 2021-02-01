@@ -46,6 +46,24 @@ class remove_element_27:
         
         return res                
 
+class find_first_and_last_postion_of_element_in_sorted_array_34:
+    def searchRange(self, nums, target):
+        res  = [-1, -1]
+        for i in range(len(nums)):
+            if nums[i] == target:
+                res[0] = i
+                break
+            
+        if res[0] == -1:
+            return res
+        
+        for i in range(len(nums) - 1, -1, -1):
+            if nums[i] == target:
+                res[1] = i
+                break
+        
+        return res
+    
 class trapping_rain_water_42:
     def trap(self, height):
         if height is None or len(height) == 0:
@@ -107,6 +125,70 @@ class maximum_subarray_53:
             res = max(res, __sum)
             
         return res 
+
+class spiral_matrix_54:
+    def spiralOrder(self, matrix):
+        res = []
+        if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
+            return res
+        
+        col_begin = 0
+        col_end = len(matrix[0]) - 1
+        row_begin = 0
+        row_end = len(matrix) - 1
+        while row_begin <= row_end and col_begin <= col_end:
+            for i in range(col_begin, col_end + 1):
+                res.append(matrix[row_begin][i])
+                
+            row_begin += 1
+            for i in range(row_begin, row_end + 1):
+                res.append(matrix[i][col_end])
+                
+            col_end -= 1
+            if row_begin <= row_end:
+                for i in range(col_end, col_begin - 1 , -1):
+                    res.append(matrix[row_end][i])
+                    
+            row_end -= 1
+            if col_begin <= col_end:
+                for i in range(row_end, row_begin - 1, -1):
+                    res.append(matrix[i][col_begin])
+                    
+            col_begin += 1
+            
+        return res
+
+class spiral_matrix_II_59:
+    def generateMatrix(self, n):
+        res = [[0]*n for _ in range(n)]
+        row_begin = 0
+        row_end = n - 1
+        col_begin = 0
+        col_end = n - 1
+        num = 1
+        while row_begin <= row_end and col_begin <= col_end:
+            for i in range(col_begin, col_end + 1):
+                res[row_begin][i] = num
+                num += 1
+                
+            row_begin += 1
+            for i in range(row_begin, row_end + 1):
+                res[i][col_end] = num
+                num += 1
+                
+            col_end -= 1
+            for i in range(col_end, col_begin - 1, -1):
+                res[row_end][i] = num
+                num += 1
+                
+            row_end -= 1
+            for i in range(row_end, row_begin - 1, -1):
+                res[i][col_begin] = num
+                num += 1
+                
+            col_begin += 1
+        
+        return res
         
 class merge_intervals_56:
     def merge(self, intervals):
@@ -151,7 +233,48 @@ class insert_interval_57:
             i += 1
             
         return res 
-                 
+
+class set_matrix_zeroes_73:
+    def setZeroes(self, matrix):
+        if matrix is None or len(matrix) == 0 or len(matrix[0]) == 0:
+            return 0
+        
+        row_num = len(matrix)
+        col_num = len(matrix[0])
+        row = False
+        col = False
+        
+        for i in range(row_num):
+            for j in range(col_num):
+                if matrix[i][j] == 0:
+                    matrix[0][j] = 0
+                    matrix[i][0] = 0
+                    if i == 0:
+                        row = True
+                        
+                    if j == 0:
+                        col = True
+        
+        for i in range(1, row_num):
+            if matrix[i][0] == 0:
+                for j in range(1, col_num):
+                    matrix[i][j] = 0
+                    
+        for j in range(1, col_num):
+            if matrix[0][j] == 0:
+                for i in range(1, row_num):
+                    matrix[i][j] = 0
+                    
+        if row:
+            for j in range(col_num):
+                matrix[0][j] = 0
+                
+        if col:
+            for i in range(row_num):
+                matrix[i][0] = 0
+                
+        return matrix
+                
 class sort_colors_75:
     """ Dutch National Flag Problem
     time: O(n)

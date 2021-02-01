@@ -14,7 +14,13 @@ def test_26():
     nums = [0,0,1,1,1,2,2,3,3,4]
     print("Test question 26")
     assert topics.remove_duplicates_from_sorted_array_26().removeDuplicates(nums) == 5
-    
+
+def test_34():
+     nums = [5,7,7,8,8,10]
+     target = 6
+     print("Test question 34")
+     assert topics.find_first_and_last_postion_of_element_in_sorted_array_34().searchRange(nums, target)
+
 def test_27():
     nums = [0,1,2,2,3,0,4,2]
     print("Test question 27")
@@ -35,12 +41,27 @@ def test_53():
     print("Test question 53")
     assert topics.maximum_subarray_53().maxSubArray_A(nums) == 6
     assert topics.maximum_subarray_53().maxSubArray_B(nums) == 6
+
+def test_54():
+    matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+    print("Test question 54")
+    assert topics.spiral_matrix_54().spiralOrder(matrix) == [1,2,3,4,8,12,11,10,9,5,6,7]
     
 def test_56():
     intervals = [[1,3],[2,6],[8,10],[15,18]]
     print("Test question 56")
     assert topics.merge_intervals_56().merge(intervals) == [[1,6],[8,10],[15,18]]
 
+def test_59():
+    print("Test question 59")
+    assert topics.spiral_matrix_II_59().generateMatrix(3) == [[1,2,3],[8,9,4],[7,6,5]]
+    assert topics.spiral_matrix_II_59().generateMatrix(1) == [[1]]
+
+def test_73():
+    matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+    print("Test question 73")
+    assert topics.set_matrix_zeroes_73().setZeroes(matrix) == [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+    
 def test_152():
     nums = [2,3,-2,4]
     print("Test question 152")
