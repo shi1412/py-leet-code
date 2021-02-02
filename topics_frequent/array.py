@@ -63,7 +63,74 @@ class find_first_and_last_postion_of_element_in_sorted_array_34:
                 break
         
         return res
+
+class valid_sudoku_36:
+    def isValidSudoku(self, board):
+        if board is None or len(board) == 0:
+            return False
+        
+        for i in range(len(board)):
+            rows = set()
+            cols = set()
+            cube = set()
+            for j in range(len(board[0])):
+                if board[i][j] != "." and board[i][j] in rows:
+                    return False
+                
+                rows.add(board[i][j])
+                if board[j][i] != "." and board[j][i] in cols:
+                    return False
+                
+                cols.add(board[j][i])
+                
+                row_index = 3 * (i // 3)
+                col_index = 3 * (i % 3)
+                if board[row_index + j // 3][col_index + j % 3] != "." and board[row_index + j // 3][col_index + j % 3] in cube:
+                    return False
+                
+                cube.add(board[row_index + j // 3][col_index + j % 3])
+                
+        return True
+
+class sudoku_solver_37:
+    def solveSudoku(self, board):
+        if board is None or len(board) == 0:
+            return 
+        
+        self.solve(board)
+        return board
     
+    def solve(self, board):
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == ".":
+                    for c in range(1, 10):
+                        if self.isValid(board, i, j, str(c)):
+                            board[i][j] = str(c)
+                            if self.solve(board):
+                                return True
+                            else:
+                                board[i][j] = "."
+                    
+                    return False
+        
+        return True
+    
+    def isValid(self, board, row, col, c):
+        for i in range(9):
+            if board[i][col] != "." and board[i][col] == c:
+                return False
+            
+            if board[row][i] != "." and board[row][i] == c:
+                return False
+            
+            row_index = 3 * (row // 3)
+            col_index = 3 * (col // 3)
+            if board[row_index + i // 3][col_index + i % 3] != "." and board[row_index + i // 3][col_index + i % 3] == c:
+                return False
+            
+        return True
+        
 class trapping_rain_water_42:
     def trap(self, height):
         if height is None or len(height) == 0:
