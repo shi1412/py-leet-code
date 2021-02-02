@@ -93,6 +93,14 @@ def test_253():
     assert topics.meeting_rooms_253().minMeetingRooms_A(intervals) == 2
     assert topics.meeting_rooms_253().minMeetingRooms_B(intervals) == 2
     
+def test_311():
+    A = [[1,0,0],[-1,0,3]]
+    B = [[7,0,0],[0,0,0],[0,0,1]]
+    print("Test question 311")
+    assert topics.sparse_matrix_multiplicatoin_311().multiply(A, B) == [[7,0,0],[-7,0,3]]
+    
+    
+    
 def test_325():
     nums = [-2, -1, 2, 1]
     k = 1

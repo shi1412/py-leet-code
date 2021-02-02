@@ -670,6 +670,25 @@ class longest_increasing_subsequence_300:
             
         return res
 
+class sparse_matrix_multiplicatoin_311:
+    def multiply(self, A, B):
+        if A is None or B is None:
+            return [[]]
+        
+        if len(A) == 0 or len(B) == 0:
+            return [[]]
+        
+        a_row, b_row, b_col = len(A), len(B), len(B[0])
+        res = [[0]*b_col for _ in range(a_row)]
+        for i in range(a_row):
+            for j in range(b_row):
+                if A[i][j] != 0:
+                    for k in range(b_col):
+                        if B[j][k] != 0:
+                            res[i][k] += A[i][j] * B[j][k]
+                            
+        return res
+        
 class maximum_size_subarray_sum_equals_k_325:
     def maxSubArrayLen(self, nums, k):
         obj = {0: -1}
