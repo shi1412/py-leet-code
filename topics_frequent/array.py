@@ -452,6 +452,15 @@ class missing_range_163:
         else:
             return "{0}->{1}".format(lower, upper)
 
+class rotate_array_189:
+    def rotate(self, nums, k):
+        if nums is None or len(nums) == 0:
+            return nums
+        
+        k = k % len(nums)
+        nums[:k], nums[k:] = nums[len(nums) - k:], nums[:len(nums) - k]
+        return nums
+
 class minimum_size_subarray_sum_209:
     def minSubArray(self, s, nums):
         res = float("inf")
@@ -644,6 +653,36 @@ class find_the_duplicate_number_287:
             
             dup.add(num)
 
+class game_of_life_289:
+    def gameOfLife_A(self, board):
+        if board is None or len(board) == 0 or len(board[0]) == 0:
+            return board
+        
+        neighbors = [(0, -1), (0, 1), \
+            (-1, -1), (-1, 0), (-1, 1), \
+            (1, -1), (1, 0), (1, 1)]
+        
+        row = len(board)
+        col = len(board[0])
+        dup_board = [[board[i][j] for j in range(col)] for i in range(row)]
+        
+        for i in range(row):
+            for j in range(col):
+                count = 0
+                for elem in neighbors:
+                    r = i + elem[0]
+                    c = j + elem[1]
+                    if (r < row and r >= 0) and (c < col and c >=0) and dup_board[r][c] == 1:
+                        count += 1
+                        
+                if dup_board[i][j] == 1 and (count < 2 or count > 3):
+                    board[i][j] = 0
+                    
+                if dup_board[i][j] == 0 and count == 3:
+                    board[i][j] = 1
+                    
+        return board
+    
 class longest_increasing_subsequence_300:
     def lengthOfLIS_A(self, nums):
         """

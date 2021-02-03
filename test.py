@@ -85,6 +85,11 @@ def test_163():
     assert topics.missing_range_163().findMissingRanges(nums, l, u) == ["2","4->49","51->74","76->99"]
     assert topics.missing_range_163().findMissingRanges(nums1, l1, u1) == ["1"]
     assert topics.missing_range_163().findMissingRanges(nums2, l2, u2) == ["-3->-1"]
+    
+def test_189():
+    nums = [-1,-100,3,99]
+    k = 2
+    assert topics.rotate_array_189().rotate(nums, k) == [3,99,-1,-100]
 
 def test_209():
     s = 7
@@ -102,7 +107,12 @@ def test_253():
     print("Test question 253")
     assert topics.meeting_rooms_253().minMeetingRooms_A(intervals) == 2
     assert topics.meeting_rooms_253().minMeetingRooms_B(intervals) == 2
-    
+
+def test_289():
+    board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+    print("Test question 289")
+    assert topics.game_of_life_289().gameOfLife_A(board) == [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+
 def test_311():
     A = [[1,0,0],[-1,0,3]]
     B = [[7,0,0],[0,0,0],[0,0,1]]
