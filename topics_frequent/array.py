@@ -627,7 +627,32 @@ class meeting_rooms_253:
             heapq.heappush(res, intervals[i][1])
             
         return len(res)
+
+class h_index_274:
+    def hIndex_A(self, citations):
+        """
+        T: O(nlogn)
+        S: O(1)
+        """
+        citations.sort()
+        res = 0
+        n = len(citations)
+        while res < n and citations[n - 1 - res] > res:
+            res += 1
+            
+        return res
     
+class wiggle_sort_280:
+    def wiggleSort(self, nums):
+        if nums is None or len(nums) == 0:
+            return
+        
+        for i in range(1, len(nums)):
+            if (i % 2 == 1 and nums[i] < nums[i - 1]) or (i % 2 == 0 and nums[i] > nums[i - 1]):
+                nums[i], nums[i - 1] = nums[i - 1], nums[i] 
+                
+        return nums
+  
 class move_zeroes_283:
     def moveZeroes(self, nums):
         if nums is None or len(nums) == 0:

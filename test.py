@@ -108,6 +108,16 @@ def test_253():
     assert topics.meeting_rooms_253().minMeetingRooms_A(intervals) == 2
     assert topics.meeting_rooms_253().minMeetingRooms_B(intervals) == 2
 
+def test_274():
+    citations = [3,0,6,1,5]
+    print("Test question 274")
+    assert topics.h_index_274().hIndex_A(citations) == 3
+    
+def test_280():
+    nums =  [3,5,2,1,6,4]
+    print("Test questions 280")
+    assert topics.wiggle_sort_280().wiggleSort(nums) == [3,5,1,6,2,4]
+    
 def test_289():
     board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
     print("Test question 289")
