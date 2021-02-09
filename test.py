@@ -71,6 +71,12 @@ def test_73():
     matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
     print("Test question 73")
     assert topics.set_matrix_zeroes_73().setZeroes(matrix) == [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+
+def test_134():
+    gas = [1,2,3,4,5]
+    cost = [3,4,5,1,2]
+    print("Test question 134")
+    assert topics.gas_station_134().canCompleteCircuit(gas, cost) == 3
     
 def test_152():
     nums = [2,3,-2,4]
@@ -134,3 +140,14 @@ def test_325():
     k = 1
     print("Test quesion 325")
     assert topics.maximum_size_subarray_sum_equals_k_325().maxSubArrayLen(nums, k) == 2
+    
+def test_370():
+    length = 5
+    updates = [[1,3,2],[2,4,3],[0,2,-2]]
+    print("Test question 370")
+    assert topics.range_addition_370().getModifiedArray(length, updates) == [-2,0,3,5,3]
+    
+def test_376():
+    nums = [1,7,4,9,2,5]
+    print("Test question 376")
+    assert topics.wiggle_subsequence_376().wiggleMaxLength(nums) == 6

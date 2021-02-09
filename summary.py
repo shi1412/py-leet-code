@@ -447,6 +447,22 @@ class merge_sorted_array_88:
             
         return nums1
 
+class gas_station_134:
+    def canCompleteCircuit(self, gas, cost):
+        if gas is None or cost is None or len(gas) == 0 or len(cost) == 0 or len(gas) < len(cost):
+            return -1
+        
+        total, sum_, start = 0, 0, 0
+        for i in range(len(gas)):
+            total += gas[i] - cost[i]
+            if sum_ < 0:
+                sum_ = gas[i] - cost[i]
+                start = i
+            else:
+                sum_ += gas[i] - cost[i]
+        
+        return -1 if total < 0 else start
+
 class maximum_product_subarray_152:
     def maxProduct(self, nums):
         if nums is None or len(nums) == 0:
@@ -853,6 +869,40 @@ class increasing_triplet_subsequence_334:
             
         return False
 
+class range_addition_370:
+    def getModifiedArray(self, length, updates):
+        res = [0]*(length + 1)
+        for i, j, d in updates:
+            res[i] += d
+            res[j + 1] -= d
+        
+        for i in range(1, length):
+            res[i] += res[i - 1]
+            
+        res.pop()
+        return res
+
+class wiggle_subsequence_376:
+    def wiggleMaxLength(self, nums):
+        n = len(nums)
+        if n < 2:
+            return n
+        
+        up = [1] + [0]*(n - 1)
+        down = [1] + [0]*(n - 1)
+        for i in range(1, n):
+            if nums[i] > nums[i - 1]:
+                up[i] = max(up[i - 1], down[i - 1] + 1)
+                down[i] = down[i - 1]
+            elif nums[i] < nums[i - 1]:
+                up[i] = up[i - 1]
+                down[i] = max(up[i - 1] + 1, down[i - 1])
+            else:
+                up[i] = up[i - 1]
+                down[i] = down[i - 1]
+                
+        return max(up[n - 1], down[n - 1])
+    
 class first_unique_character_in_a_string_387:
     def firstUniqChar(self, s):
         if s is None or len(s) == 0:
