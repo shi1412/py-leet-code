@@ -1,7 +1,8 @@
 # Leet Code for  Python
 
 #### LeetCode by Company
-:loudspeaker: *gs_frequent* Goldman Sachs
+ :shaved_ice: Goldman Sachs gs.py
+ :shaved_ice: FaceBook fb.py
 #### LeetCode by data structures and algorithms
 :books: *basic_implement* Basic data structures and algorithms
 #### LeetCode summary

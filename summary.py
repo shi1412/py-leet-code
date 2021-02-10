@@ -505,6 +505,18 @@ class missing_range_163:
         else:
             return "{0}->{1}".format(lower, upper)
 
+class majority_element_169:
+    def majorityElement(self, nums):
+        count = 0
+        res = 0
+        for num in nums:
+            if count == 0:
+                res = num
+            
+            count += (1 if num == res else -1)
+            
+        return res
+    
 class rotate_array_189:
     def rotate(self, nums, k):
         if nums is None or len(nums) == 0:
@@ -772,6 +784,37 @@ class game_of_life_289:
                     board[i][j] = 1
                     
         return board
+
+class best_meeting_point_296:
+    def minTotalDistance(self, grid):
+        if grid is None or len(grid) == 0 or len(grid[0]) == 0:
+            return 0
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        I = []
+        J = []
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    I.append(i)
+                    
+        for j in range(n):
+            for i in range(m):
+                if grid[i][j] == 1:
+                    J.append(j)
+                    
+        return self._min(I) + self._min(J)
+    
+    def _min(self, arr):
+        i, j, __sum = 0, len(arr) - 1, 0
+        while i < j:
+            __sum += arr[j] - arr[i]
+            j -= 1
+            i += 1
+            
+        return __sum
     
 class longest_increasing_subsequence_300:
     def lengthOfLIS_A(self, nums):
