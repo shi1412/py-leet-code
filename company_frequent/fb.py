@@ -10,6 +10,27 @@ class palindrome_permutation_266:
         
         return count <= 1 
 
+class reverse_vowels_of_a_string_345:
+    def reverseVowels(self, s):
+        if s is None or len(s) == 0:
+            return s
+        
+        vowles = "aeiouAEIOU"
+        start = 0
+        end = len(s) - 1
+        res = list(s)
+        while start < end:
+            if res[start] in vowles and res[end] in vowles:
+                res[start], res[end] = res[end], res[start]
+                start += 1
+                end -= 1
+            elif res[start] in vowles:
+                end -= 1
+            else:
+                start += 1
+        
+        return "".join(res)
+        
 class moving_average_from_data_stream_346:
     def __init__(self, size):
         self.size = size
@@ -28,6 +49,40 @@ class moving_average_from_data_stream_346:
         self.sum = self.sum - tail + val
         return self.sum / min(self.size, self.count)
 
+class intersection_of_two_arrays_II_350:
+    def intersect(self, nums1, nums2):
+        nums1.sort()
+        nums2.sort()
+        i, j, k = 0, 0, 0
+        while i < j:
+            if nums1[i] < nums2[j]:
+                i += 1
+            elif nums1[i] > nums2[j]:
+                j += 1
+            else:
+                nums1[k] = nums1[i]
+                i += 1
+                j += 1
+                k += 1
+        
+        return nums1[0:k]
+
+class ransom_note_383:
+    def canConstruct(self, ransomNote, magazine):
+        if len(magazine) < len(ransomNote):
+            return False
+        
+        m_counts = Counter(magazine)
+        r_counts = Counter(ransomNote)
+        
+        for key, value in r_counts.items():
+            if not m_counts[key]:
+                return False
+            elif m_counts[key] and m_counts[key] < value:
+                return False
+            
+        return True
+              
 class island_perimeter_463:
     def islandPerimeter(self, grid):
         row = len(grid)
@@ -131,6 +186,51 @@ class merge_two_binary_trees_617:
         root1.left = self.mergeTrees(root1.left, root2.left)
         root2.right = self.mergeTrees(root2.right, root2.right)
         return root1
+
+class valid_palindrome_II_680:
+    def validPalindrome(self, s):
+        if s is None or len(s) == 0:
+            return False
+        
+        left, right = 0, len(s) -1
+        while left < right:
+            if s[left] == s[right]:
+                left += 1
+                right -= 1
+            else: 
+                return self.helper(s, left + 1 , right) or \
+                    self.helper(s, left, right - 1)
+        
+        return True
+        
+    def helper(self, s, left, right):
+        i, j = left, right
+        while i < j:
+            if s[i] != s[j]:
+                return False
+            
+            i += 1
+            j -= 1
+            
+        return True
+    
+class binary_search_704:
+    def search(self, nums, target):
+        if nums is None or len(nums) == 0:
+            return -1
+        
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] == target:
+                return mid
+            
+            if target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+                
+        return -1 
         
 class toeplitz_matrix_766:
     def isToeplitzMatrix(self, matrix):
@@ -162,6 +262,32 @@ class goat_latin_824:
             str_list[i] += "a"*(i + 1)
         
         return " ".join(str_list)
+
+class backspace_string_compare_844:
+    def backspaceCompare(self, S, T):
+        return self.helper(S) == self.helper(T)
+    
+    def helper(self, __str):
+        stack = []
+        for i in __str:
+            if stack and i == "#":
+                stack.pop()
+            elif i != "#":
+                stack.append(i)
+                
+        return "".join(stack)
+    
+class monotonic_array_896:
+    def isMonotonic(self, A):
+        increasing = decreasing = True
+        for i in range(len(A) - 1):
+            if A[i] > A[i + 1]:
+                increasing = False
+                
+            if A[i] < A[i + 1]:
+                decreasing = False
+                
+        return increasing or decreasing
         
 class squares_of_a_sorted_array_977:
     def sortedSquares(self, nums):
@@ -182,7 +308,57 @@ class squares_of_a_sorted_array_977:
             res[i] = s * s
         
         return res
+    
+class add_to_array_form_of_integer_989:
+    def addToArrayForm(self, A, K):
+        n = len(A)
+        res = []
+        i, __sum, carry = n - 1, 0, 0
         
+        while i >= 0 or K != 0:
+            x = A[i] if i >= 0 else 0
+            y = K % 10 if K != 0 else 0
+            __sum = x + y + carry 
+            carry = __sum // 10
+            
+            K = K // 10
+            i -= 1
+            res.append(__sum % 10)
+            
+        if carry != 0:
+            res.append(carry)
+        
+        return res[::-1]
+           
+class cousins_in_binary_tree_993:
+    def __init__(self):
+        self.dep = None
+        self.check = False
+    
+    def isCousins(self, root, x, y):
+        self.helper(root, 0, x, y)
+        return self.check
+
+    def helper(self, node, dep, x, y):
+        if node is None:
+            return False
+     
+        if self.dep and dep > self.dep:
+            return False
+        
+        if node.val == x or node.val == y:
+            if self.dep is None:
+                self.dep = dep
+            
+            return self.dep == dep
+        
+        left = self.helper(node.left, dep + 1, x, y)
+        right = self.helper(node.right, dep + 1, x, y)
+        if left and right and self.dep != dep + 1:
+            self.check = True
+            
+        return left or right
+    
 class remove_all_adjacent_duplicates_in_string_1047:
     def removeDuplicates(self, S):
         if S is None or len(S) == 0:
@@ -216,7 +392,24 @@ class intersection_of_three_tree_sorted_arrays_1213:
                     p3 += 1
                     
         return res   
-    
+
+class kth_missing_postive_number_1539:
+    def findKthPositive(self, arr, k):
+        if k <= arr[0] - 1:
+            return k
+        # if there is missing value at the beginning
+        k -= arr[0] - 1
+        for i in range(len(arr) - 1):
+            # when the missing value is in the middle
+            cur = arr[i + 1] - arr[i] - 1
+            if k <= cur:
+                return arr[i] + k
+            
+            # if k is at the end
+            k -= cur
+            
+        return arr[-1] + k
+        
 class maximum_nesting_depth_of_the_parentheses_1614:
     def maxDepth(self, s):
         if s is None or len(s) == 0:
