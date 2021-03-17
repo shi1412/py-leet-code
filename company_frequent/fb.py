@@ -1,6 +1,45 @@
 from collections import deque
 from collections import Counter
+import heapq
 
+class isomorphic_strings_205:
+    def isIsmorphic(self, s, t):
+        if s is None or t is None:
+            return True
+         
+        obj = {}
+        for i in range(len(s)):
+            a = s[i]
+            b = t[i]
+            if a in obj:
+                if obj[a] == b:
+                    continue
+                else:
+                    return False
+            else:
+                if b in obj.values():
+                    return False
+                else:
+                    obj[a] = b
+                    
+        return True
+
+class contains_duplicate_II_219:
+    def containNearbyDuplicate(self, nums, k):
+        if nums is None:
+            return False
+        
+        res = set()
+        for i in range(len(nums)):
+            if nums[i] in res:
+                return True
+            
+            res.add(nums[i])
+            if len(res) > k:
+                res.remove(nums[i - k])
+        
+        return False
+        
 class palindrome_permutation_266:
     def canPermutePalindrome(self, s):
         count = 0
@@ -146,7 +185,43 @@ class add_string_415:
             res.append(carry)
             
         return "".join(str(x) for x in res[::-1])
+
+class diameter_of_binary_tree_543:
+    def diameterOfBinaryTree(self, root):
+        self.res = 1
+        self.helper(root)
+        return self.res - 1
     
+    def helper(self, root):
+        if root is None:
+            return 0
+        
+        L = self.helper(root.left)
+        R = self.helper(root.right)
+        self.res = max(self.res, L + R + 1)
+        return max(L, R) + 1
+
+class subtree_of_another_tree_572:
+    def isSubTree(self, s, t):
+        if not s and not t:
+            return True
+        elif not s or not t:
+            return False
+        
+        return self.isSameTree(s, t) or \
+            self.isSameTree(s.left, t) or \
+            self.isSameTree(s.right, t)
+                    
+    def isSameTree(self, s, t):
+        if not s and not t:
+            return True
+        elif not s or not t:
+            return False
+        
+        return s.val == t.val and \
+            self.isSameTree(s.right, t.right) and \
+            self.isSameTree(s.left, t.left)
+        
 class average_of_levels_in_binary_tree_637:
     # DFS
     def averageOfLevels_A(self, root):
@@ -213,6 +288,20 @@ class valid_palindrome_II_680:
             j -= 1
             
         return True
+
+class kth_largest_element_in_a_stream_703:
+    def __init__(self, k, nums):
+        self.heap = []
+        self.k = k
+        for num in nums:
+            self.add(num)
+            
+    def add(self, val):
+        heapq.heappush(self.heap, val)
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
+            
+        return self.heap[0]
     
 class binary_search_704:
     def search(self, nums, target):
@@ -288,6 +377,28 @@ class monotonic_array_896:
                 decreasing = False
                 
         return increasing or decreasing
+
+class range_sum_of_bst_938:
+    def rangeSumBST(self, root, low, high):
+        self.res = 0
+        self.l = low
+        self.h = high
+        self.helper(root)
+        return self.res
+    
+    def helper(self, root):
+        if root is None:
+            return 0
+        
+        if root:
+            if self.l <= root.val <= self.h:
+                self.res += root.val
+            
+            if self.l < root.val:
+                self.helper(root.left)
+                
+            if self.h > root.val:
+                self.helper(root.right)
         
 class squares_of_a_sorted_array_977:
     def sortedSquares(self, nums):
