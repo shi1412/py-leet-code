@@ -1,3 +1,5 @@
+from collections import deque
+
 class TreeNode:
     """ Definition of a binary tree node."""
     def __init__(self, x):
@@ -142,5 +144,49 @@ class Postorder:
 # --------------------------
 # Levelorder 
 # --------------------------
-# Recursion
-# Iteration
+class LevelOrder:
+    def __init__(self):
+        self.res = []
+        
+    def recursion(self, root):
+        if root is None:
+            return self.res
+        
+        self.helper(root, 0)
+        return self.res
+    
+    def helper(self, root, level):
+        if root is None:
+            return
+        
+        if level == len(self.res):
+            self.res.append([])
+        
+        self.res[level].append(root.val)
+        if root.left:
+            self.helper(root.left, level + 1)
+            
+        if root.right:
+            self.helper(root.right, level + 1)
+            
+    def iteration(self, root):
+        if root is None:
+            return self.res
+        
+        queue = deque([root, ])
+        while queue:
+            size = len(queue)
+            i = 0
+            while i <= size:
+                cur = queue.popleft()
+                if cur.left:
+                    queue.append(cur.left)
+                    
+                if cur.right:
+                    queue.append(cur.right)
+                
+                i += 1
+                self.res.append(cur.val)
+                
+        return self.res
+        
