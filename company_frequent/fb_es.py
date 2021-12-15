@@ -1,6 +1,8 @@
 from collections import deque
 from collections import Counter
 import heapq
+from typing import List
+from utilities.tree import TreeNode
 
 class isomorphic_strings_205:
     def isIsmorphic(self, s, t):
@@ -378,6 +380,25 @@ class monotonic_array_896:
                 
         return increasing or decreasing
 
+class increasing_order_search_tree_897:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        res = []
+        self.helper(root, res)
+        ans = cur = TreeNode(None)
+        for i in res:
+            cur.right = TreeNode(i)
+            cur = cur.right
+
+        return ans.right
+
+    def helper(self, root, res):
+        if not root:
+            return
+        
+        self.helper(root.left)
+        res.append(root.val)
+        self.helper(root.right)
+
 class range_sum_of_bst_938:
     def rangeSumBST(self, root, low, high):
         self.res = 0
@@ -503,6 +524,35 @@ class intersection_of_three_tree_sorted_arrays_1213:
                     p3 += 1
                     
         return res   
+
+class count_negative_numbers_in_a_sorted_matrix:
+    def solution_one(self, grid: List[List[int]]) -> int:
+        count = 0
+        for i in grid:
+            count += self.helper(i)
+
+        return count
+
+    def helper(self, row):
+        i = 0
+        j = len(row) - 1
+        while i <= j:
+            mid = (i + j) // 2
+            if row[mid] < 0:
+                j = mid - 1
+            elif row[mid] >= 0:
+                i = mid + 1
+
+        return len(row) - i
+
+    def solution_two(self, grid: List[List[int]]) -> int:
+        count = 0
+        for i in grid:
+            for j in i:
+                if j < 0:
+                    count += 1
+
+        return count
 
 class kth_missing_postive_number_1539:
     def findKthPositive(self, arr, k):
